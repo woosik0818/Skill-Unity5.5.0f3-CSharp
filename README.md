@@ -4,7 +4,7 @@
 - Unity 엔진 기반 C#스크립트를 이용하여 게임을 만들었습니다. 유저들의 쾌적한 게임 환경을 위하여 UI부터 게임 컨텐츠와 VR 기술을 통합하여 다른 RPG 게임과 차별을 두었습니다. 
 			
 - [1장 기획서_임재형](https://github.com/woosik0818/Skill-Unity5.5.0f3-CSharp/blob/master/1장-기획서_임재형.pdf) - 게임을 기획하는 단계에서 작성한 1장 기획서 입니다.			
-			- 코드
+			
 			
 		* PlayerAttack.cs - 게임 캐릭터의 공격에 관한 코드입니다. 
 
