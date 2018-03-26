@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillManager : MonoBehaviour {
-
+public class SkillManager : MonoBehaviour 
+{
     public static SkillManager Instance;
     public GameObject Skillinventory;
 
     SkillInventory IV;
 
     SkillInfo[] itemslots;
+ 
     // Use this for initialization
     void Awake()
     {
@@ -33,6 +34,7 @@ public class SkillManager : MonoBehaviour {
             }
         }
     }
+
     public SkillInventory getInventory()
     {
         return IV;

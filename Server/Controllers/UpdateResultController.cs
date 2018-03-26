@@ -13,7 +13,8 @@ namespace DotnetCoreServer.Controllers
         IUserDao userDao;
         IStageResultDao stageResultDao;
 
-        public UpdateResultController(IUserDao userDao, IStageResultDao stageResultDao){
+        public UpdateResultController(IUserDao userDao, IStageResultDao stageResultDao)
+        {
             this.userDao = userDao;
             this.stageResultDao = stageResultDao;
         }

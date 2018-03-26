@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillEquipManager : MonoBehaviour {
-
+public class SkillEquipManager : MonoBehaviour 
+{
     public static SkillEquipManager Instance;
     public GameObject[] EquipSlots;
     public GameObject[] UIButtons;
@@ -88,7 +88,6 @@ public class SkillEquipManager : MonoBehaviour {
         UIText.text = "" + temp;
 
         UISlotChange();
-        //CooltimeManager.Instance.SlotChange(UIslotCount);
     }
 
     public void SkillInfoShow(GameObject obj, Sprite Img, int stat, int charge)
@@ -117,6 +116,7 @@ public class SkillEquipManager : MonoBehaviour {
             ButtonText.text = "해제";
             sellbutton.GetComponent<UnityEngine.UI.Button>().interactable = false;
         }
+
         else                //스킬을 장착하려고 할 때
         {
             if(SkillEquipInfo[equipmentslots] != null)
@@ -149,6 +149,7 @@ public class SkillEquipManager : MonoBehaviour {
             ChoiceBackground.SetActive(true);
             choiceSlot.GetComponent<SkillSlot>().ItemCheck();
         }
+
         else if (ButtonText.text == "해제")
         {
             SkillOff();
@@ -167,11 +168,7 @@ public class SkillEquipManager : MonoBehaviour {
     {
         if (SkillEquipInfo[((UIslotCount * 4) + slotNumber)] != null)        //누른 버튼의 스킬정보가 들어있는 경우에만
         {
-            //if (CooltimeManager.Instance.leftCooltime(slotNumber, UIslotCount) == 0)         //쿨타임이 없는 경우에만
-            {
-                SkillEquipInfo[((UIslotCount * 4) + slotNumber)].UseSkill();     //누른 버튼의 스킬정보
-            //    CooltimeManager.Instance.skilluse(slotNumber, SkillEquipInfo[((UIslotCount * 4) + slotNumber)].cooltime);
-            }
+            SkillEquipInfo[((UIslotCount * 4) + slotNumber)].UseSkill();     //누른 버튼의 스킬정보
         }
     }
 }

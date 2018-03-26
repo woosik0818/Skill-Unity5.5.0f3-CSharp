@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneStartManager : MonoBehaviour {
-
+public class SceneStartManager : MonoBehaviour 
+{
     public static SceneStartManager Instance;
 
     public GameObject player;
@@ -34,7 +34,8 @@ public class SceneStartManager : MonoBehaviour {
     public UnityEngine.UI.Slider EXPBar;
 
     // Use this for initialization
-    void Start () {
+    void Start () 
+    {
         if (Instance == null)
             Instance = this;
         UpdatePlayerData();
@@ -71,26 +72,31 @@ public class SceneStartManager : MonoBehaviour {
         CharactorManager.Instance.AllowChange();
         UpdatePlayerData();
     }
+
     public void STRUP()
     {
         CharactorManager.Instance.StrUp();
         UpdatePlayerData();
     }
+
     public void DEXUP()
     {
         CharactorManager.Instance.DexUp();
         UpdatePlayerData();
     }
+
     public void INTUP()
     {
         CharactorManager.Instance.IntUp();
         UpdatePlayerData();
     }
+
     public void CONUP()
     {
         CharactorManager.Instance.ConUp();
         UpdatePlayerData();
     }
+
     public void StatNotAllow()
     {
         CharactorManager.Instance.ReturnTemp();
@@ -102,15 +108,18 @@ public class SceneStartManager : MonoBehaviour {
         EXPBar.maxValue = CharactorManager.Instance.GetMaxEXP();
         ChangeEXP();
     }
+
     public void ChangeEXP()
     {
         EXPBar.value = CharactorManager.Instance.GetCurrentEXP();
     }
+
     public void MoneyUp()
     {
         Money_Text.text ="" + CharactorManager.Instance.GetMoney();
         UpdatePlayerData();
     }
+
     public void PlayerSet()
     {
         player.GetComponent<PlayerHealth>().HpStat(CharactorManager.Instance.GetHP());

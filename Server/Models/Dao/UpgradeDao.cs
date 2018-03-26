@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 namespace DotnetCoreServer.Models
 {
-    public interface IUpgradeDao{
+    public interface IUpgradeDao
+    {
         List<UpgradeData> GetUpgradeInfo();
         UpgradeData GetUpgradeInfo(string UpgradeType, int stat, long userID);
         
@@ -14,11 +15,13 @@ namespace DotnetCoreServer.Models
     {
         public IDB db {get;}
 
-        public UpgradeDao(IDB db){
+        public UpgradeDao(IDB db)
+        {
             this.db = db;
         }
 
-        public List<UpgradeData> GetUpgradeInfo(){
+        public List<UpgradeData> GetUpgradeInfo()
+        {
             
             List<UpgradeData> list = new List<UpgradeData>();
             using(MySqlConnection conn = db.GetConnection())
@@ -52,7 +55,8 @@ namespace DotnetCoreServer.Models
             return list;
         }
         
-        public UpgradeData GetUpgradeInfo(string UpgradeType, int stat, long userID){
+        public UpgradeData GetUpgradeInfo(string UpgradeType, int stat, long userID)
+        {
             
             UpgradeData data = new UpgradeData();
             using(MySqlConnection conn = db.GetConnection())
@@ -85,6 +89,5 @@ namespace DotnetCoreServer.Models
             
             return null;
         }
-
     }
 }

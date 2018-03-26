@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillSlotManager : MonoBehaviour {
-
+public class SkillSlotManager : MonoBehaviour 
+{
     public static SkillSlotManager Instance;
-
     public UnityEngine.UI.Button[] SkillSlots;
-
     slotinfo[] slots;
-
     public int SlotsCount = 4;
 
     struct slotinfo

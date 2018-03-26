@@ -2,15 +2,16 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class DialogControllerRanking : DialogController {
+public class DialogControllerRanking : DialogController 
+{
 	
 	public Text LabelTitle;
 	public Text LabelScoreMsg;
 
 	public Text LabelRankings;
-
 	
-	DialogDataRanking Data { 
+	DialogDataRanking Data 
+    { 
 		get; 
 		set; 
 	}
@@ -32,7 +33,8 @@ public class DialogControllerRanking : DialogController {
 	{
 		base.Build(data);
 		
-		if( ! (data is DialogDataRanking) ) {
+		if( ! (data is DialogDataRanking) ) 
+        {
 			Debug.LogError("Invalid dialog data!");
 			return;
 		}

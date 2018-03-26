@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 namespace DotnetCoreServer.Models
 {
-    public interface IStageResultDao{
+    public interface IStageResultDao
+    {
         bool InsertStageRecord(long UserID, int Point);
     }
 
@@ -12,11 +13,13 @@ namespace DotnetCoreServer.Models
     {
         public IDB db {get;}
 
-        public StageResultDao(IDB db){
+        public StageResultDao(IDB db)
+        {
             this.db = db;
         }
 
-        public bool InsertStageRecord(long UserID, int Point){
+        public bool InsertStageRecord(long UserID, int Point)
+        {
             
             string query = String.Format(
                 @"INSERT INTO tb_stage_result 
@@ -26,8 +29,8 @@ namespace DotnetCoreServer.Models
 
             Console.WriteLine(query);
 
-            using(MySqlConnection conn = db.GetConnection())
-            using(MySqlCommand cmd = (MySqlCommand)conn.CreateCommand())
+            using (MySqlConnection conn = db.GetConnection())
+            using (MySqlCommand cmd = (MySqlCommand)conn.CreateCommand())
             {
 
                 cmd.CommandText = query;
@@ -35,13 +38,7 @@ namespace DotnetCoreServer.Models
 
                 conn.Close();
             }
-
-        
             return true;
         }
-
-
-
-
     }
 }

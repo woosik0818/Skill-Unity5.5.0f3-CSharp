@@ -2,24 +2,29 @@
 using System.Collections;
 using System;
 
-public class DialogDataRanking : DialogData {
+public class DialogDataRanking : DialogData 
+{
 
-	public string Title { 
+	public string Title 
+    {
 		get; 
 		private set; 
 	}
 	
-	public int Score { 
+	public int Score 
+    { 
 		get; 
 		private set; 
 	}
 	
-	public Action<bool> Callback { 
+	public Action<bool> Callback 
+    { 
 		get; 
 		private set; 
 	}
 
-	public string rankings {
+	public string rankings 
+    {
 		get;
 		private set;
 	}

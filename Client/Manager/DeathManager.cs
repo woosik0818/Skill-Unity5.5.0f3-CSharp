@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathManager : MonoBehaviour {
-
+public class DeathManager : MonoBehaviour 
+{
     public static DeathManager Instance;
     public GameObject DeathScreen;
     public UnityEngine.UI.Text EXPText;
@@ -12,7 +12,8 @@ public class DeathManager : MonoBehaviour {
     public GameObject Player;
 
     int looseEXP;
-	// Use this for initialization
+
+    // Use this for initialization
 	void Awake ()
     {
         if (Instance == null)

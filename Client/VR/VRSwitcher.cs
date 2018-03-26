@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VRSwitcher : MonoBehaviour {
-
+public class VRSwitcher : MonoBehaviour 
+{
     public static VRSwitcher Instance;
 
     public GameObject Main_Camera;
@@ -40,7 +40,5 @@ public class VRSwitcher : MonoBehaviour {
 
         //키보드&마우스입력 On/Off
         player.GetComponent<CharactorFPSController>().enabled = !player.GetComponent<CharactorFPSController>().enabled;
-        
-
     }
 }

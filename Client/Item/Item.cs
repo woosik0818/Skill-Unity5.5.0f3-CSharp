@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public enum TYPE {HPPotion, MPPotion, Weapon, Armor}
+    public enum TYPE 
+    {
+        HPPotion, 
+        MPPotion, 
+        Weapon, 
+        Armor
+    }
 
     public TYPE type;           // 아이템의 타입.
 

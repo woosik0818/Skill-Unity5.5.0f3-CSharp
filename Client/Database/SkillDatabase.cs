@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillDatabase : MonoBehaviour {
-
+public class SkillDatabase : MonoBehaviour 
+{
     public static SkillDatabase Instance;
     public GameObject[] database;
     
@@ -44,6 +44,5 @@ public class SkillDatabase : MonoBehaviour {
                 player.GetComponent<PlayerMagic>().MpPotion();
                 break;
         }
-
     }
 }

@@ -28,8 +28,6 @@ namespace DotnetCoreServer.Controllers
         [HttpGet("{id}")]
         public User Get(long id)
         {
-            //IUserDao userDao;
-            //User user = new User();
             User user = userDao.GetUser(id);
             return user;
         }

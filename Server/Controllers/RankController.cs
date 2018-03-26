@@ -12,7 +12,8 @@ namespace DotnetCoreServer.Controllers
     {
 
         IRankDao rankDao;
-        public RankController(IRankDao rankDao){
+        public RankController(IRankDao rankDao)
+        {
             this.rankDao = rankDao;
         }
 

@@ -17,6 +17,7 @@ public class FollowingCamera : MonoBehaviour
     {
         CameraRotation = transform.rotation;
     }
+
     void LateUpdate ()
 	{
         Vector3 targetPos = follow.position + Vector3.up * distanceUp - Vector3.forward * distanceAway;
@@ -24,6 +25,7 @@ public class FollowingCamera : MonoBehaviour
 
         transform.position = Vector3.Slerp(transform.position, targetPos, Time.deltaTime * 7f);
     }
+
     public void LookTarget()
     {
         transform.rotation = CameraRotation;

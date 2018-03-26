@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FusionCardManager : MonoBehaviour
 {
-
     public static FusionCardManager Instance;
 
     public GameObject[] CardSlot;
@@ -36,11 +35,7 @@ public class FusionCardManager : MonoBehaviour
             Instance = this;
         else if (Instance != this)
             Debug.LogError("Not Single FusionCardManager!");
-
-        //SkillEquipInfo = new SkillInfo[EquipSlots.Length * 3];
-        //SkillEquipInfo[0] = BasicSkill[0].GetComponent<SkillInfo>();
-        //SkillEquipInfo[1] = BasicSkill[1].GetComponent<SkillInfo>();
-
+        
         CardInfo = new MatInfo[3];
     }
 
@@ -66,17 +61,20 @@ public class FusionCardManager : MonoBehaviour
             choiceSlot.GetComponent<FusionSlot>().ItemCheck();
             CardInfo[Cardcountnum] = NowChoiceCard;
             Cardcountnum++;
+
             if(Cardcountnum >= 3)
             {
                 FusionBackGround.SetActive(true);
                 FusionButton.GetComponent<UnityEngine.UI.Button>().interactable = true;
             }
+
             else
             {
                 FusionBackGround.SetActive(false);
                 FusionButton.GetComponent<UnityEngine.UI.Button>().interactable = false;
             }
         }
+
         else if (ButtonText.text == "해제")
         {
             CardOff();
@@ -103,7 +101,7 @@ public class FusionCardManager : MonoBehaviour
         CardInfo[CardslotNum].AddItem();
         
         int temp = CardslotNum;
-        /////////////////////////////////////////////////////////
+
         while (temp < Cardcountnum - 1)
         {
             print(temp);
@@ -114,17 +112,6 @@ public class FusionCardManager : MonoBehaviour
         Cardcountnum--;
         CardInfo[Cardcountnum] = null;
         CardSlot[Cardcountnum].transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite = DefaultImg;
-        /////////////////////////////////////////////////////////
-        //for(int i = 0; i < Cardcountnum; i++)
-        //{
-        //    print("11");
-        //    if (CardInfo[i] == null)
-        //    {
-        //        print("22");
-        //        CardInfo[i] = CardInfo[i + 1];
-        //        CardSlot[i].transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite = CardSlot[i + 1].transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite;
-        //    }
-        //}
     }
 
     public void CardEquipReady(MatInfo mat)
@@ -147,6 +134,7 @@ public class FusionCardManager : MonoBehaviour
             CardSlot[i].transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite = DefaultImg;
             CardInfo[i] = null;
         }
+
         NowChoiceCard = null;
         CardslotNum = 0;
         Cardcountnum = 0;

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EquipmentManager : MonoBehaviour {
-
+public class EquipmentManager : MonoBehaviour 
+{
     public static EquipmentManager Instance;
 
     public GameObject Player;
@@ -50,7 +50,6 @@ public class EquipmentManager : MonoBehaviour {
         EquipSlots[Itemtype].transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite = item_info.DefaultImg;
 
         PlayerStatSetting(Itemtype, item_info);
-
     }
 
     void PlayerStatSetting(int Itemtype, Item iteminfo)
@@ -68,6 +67,7 @@ public class EquipmentManager : MonoBehaviour {
         ItemInfoImg.sprite = Img;
         ItemInfoText.text = "" + stat;
     }
+
     public void ItemInfoShow(Item obj)
     {
         itemcharge = obj.itemCharge;

@@ -8,11 +8,11 @@ using DotnetCoreServer.Models;
 namespace DotnetCoreServer.Controllers
 {
     [Route("[controller]/[action]")]
-    //[Route("[controller]/[action]")]
     public class UserController : Controller
     {
         IUserDao userDao;
-        public UserController(IUserDao userDao){
+        public UserController(IUserDao userDao)
+        {
             this.userDao = userDao;
         }
 
@@ -26,7 +26,6 @@ namespace DotnetCoreServer.Controllers
             result.Message = "OK";
             return result;
         }
-
 
         // GET user/get/5
         [HttpGet("{id}")]

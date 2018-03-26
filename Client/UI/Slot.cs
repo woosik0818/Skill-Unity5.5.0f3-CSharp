@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Slot : MonoBehaviour
 {
-
     Stack<Item> slot;         // 슬롯을 스택으로 만든다.
     public Text text;         // 아이템에 개수를 표현해줄 텍스트.
     public Sprite DefaultImg; // 슬롯에 있는 아이템을 다 사용할 경우 아무것도 없는 이미지를 넣어줄 필요가 있다.
@@ -28,22 +27,9 @@ public class Slot : MonoBehaviour
 
     void Start()
     {
-        // 스택 메모리 할당.
-        //slot = new Stack<Item>();
-
-        // 맨 처음엔 슬롯이 비어있다.
-        //isSlot = false;
-
-        // 인벤토리 및 슬롯의 크기가 커지가나 작아지면
-        // 텍스트 폰트의 크기도 유동적으로 바뀌어야 한다.
-        // 텍스트 폰트의 크기를 슬롯에 크기에 따라 변경해주는 구문이다.
         RectTransform rect = text.gameObject.GetComponent<RectTransform>();
         float Size = text.gameObject.transform.parent.GetComponent<RectTransform>().sizeDelta.x;
         text.fontSize = (int)(Size * 0.5f);
-
-        // 텍스트 컴포넌트의 RectTransform을 가져온다.
-        // 텍스트 객체의 부모 객체의 x지름을 가져온다.
-        // 폰트의 크기를 부모 객체의 x지름 / 2 만큼으로 지정해준다.
     }
 
     public void AddItem(Item item)

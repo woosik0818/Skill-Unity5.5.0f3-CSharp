@@ -4,19 +4,21 @@ using System.Collections.Generic;
 using System;
 using Boomlagoon.JSON;
 
-public class Language : MonoBehaviour {
-	
+public class Language : MonoBehaviour 
+{	
 	//Singleton Member And Method
 	static Language _instance;
-	public static Language Instance {
-		get {
-			if( ! _instance ) {
+	public static Language Instance 
+    {
+		get 
+        {
+			if( ! _instance ) 
+            {
 				GameObject container = new GameObject("Language");
 				_instance = container.AddComponent( typeof( Language ) ) as Language;
 				_instance.InitLanguage ();
 				DontDestroyOnLoad( container );
 			}
-			
 			return _instance;
 		}
 	}
@@ -31,10 +33,11 @@ public class Language : MonoBehaviour {
 	
 	public string GetLanguage(string key)
 	{
-		if(LanguageText == null){
+		if(LanguageText == null)
+        {
 			InitLanguage();
 		}
+
 		return LanguageText.GetString(key);
 	}
-
 }

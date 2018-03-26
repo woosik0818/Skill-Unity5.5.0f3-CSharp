@@ -1,13 +1,9 @@
-﻿//방어력은 여기에 넣어야할듯
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
-    //방어력은 여기에 넣어야할듯
-
     // 주인공의 시작 체력입니다. 기본 100으로 설정되있습니다.
     public float startingHealth;
 	// 주인공의 현재 체력입니다. 
@@ -58,6 +54,7 @@ public class PlayerHealth : MonoBehaviour
 			// 공격 받자마자 damageImage의 색상을 빨간색(flashColour)로 변경합니다.
 			damageImage.color = flashColour;
 		}
+
 		else
 		{
 			// 공격 받고난 후에는 서서히 투명한 색(Color.clear)로 변경합니다.
@@ -85,7 +82,10 @@ public class PlayerHealth : MonoBehaviour
 		{
 			// 플레이어가 죽었을 때 수행할 명령이 정의된 Death() 함수를 호출합니다.
 			Death ();
-		}else{
+		}
+
+        else
+        {
 			// 죽은 게 아니라면, 데미지를 입었다는 Trigger를 발동시킵니다.
 			anim.SetTrigger("Damage");
 		}
@@ -93,15 +93,22 @@ public class PlayerHealth : MonoBehaviour
 
 	public void HpPotion ()
 	{
-		if (isDead == false) {
-			if (currentHealth < startingHealth) {
-				if ((currentHealth + 20) <= startingHealth) {
+		if (isDead == false) 
+        {
+			if (currentHealth < startingHealth) 
+            {
+				if ((currentHealth + 20) <= startingHealth) 
+                {
 					currentHealth += 20;
-				} else {
+				} 
+
+                else 
+                {
 					currentHealth = startingHealth;
 				}
 			}
 		}
+
         healthBar.fillAmount = currentHealth / startingHealth;
         healthBar_VR.fillAmount = currentHealth / startingHealth;
     }
@@ -117,6 +124,7 @@ public class PlayerHealth : MonoBehaviour
 
         DeathManager.Instance.Death();
 	}
+
     public void HpStat(int amount)
     {
         startingHealth = amount;

@@ -11,7 +11,6 @@ public enum DialogType
 
 public sealed class DialogManager
 {
-
     List<DialogData> _dialogQueue;
     Dictionary<DialogType, DialogController> _dialogMap;
 	DialogController _currentDialog;
@@ -30,8 +29,6 @@ public sealed class DialogManager
     {
 		_dialogQueue = new List<DialogData>();
 		_dialogMap = new Dictionary<DialogType, DialogController>();
-
-        //Prepare();
     }
 
 	public void Prepare()
@@ -62,9 +59,11 @@ public sealed class DialogManager
 
     public void Pop()
     {
-		if (_currentDialog != null){
+		if (_currentDialog != null)
+        {
         	_currentDialog.Close(
-				delegate {
+				delegate 
+                {
 					_currentDialog = null;
 			
 					if (_dialogQueue.Count > 0)

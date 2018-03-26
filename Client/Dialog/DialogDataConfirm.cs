@@ -2,17 +2,20 @@
 
 public class DialogDataConfirm : DialogData 
 {
-	public string Title { 
+	public string Title 
+    { 
 		get; 
 		private set; 
 	}
 
-	public string Message { 
+	public string Message 
+    { 
 		get; 
 		private set; 
 	}
 
-	public Action<bool> Callback { 
+	public Action<bool> Callback 
+    { 
 		get; 
 		private set; 
 	}

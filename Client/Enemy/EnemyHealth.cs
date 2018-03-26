@@ -3,8 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemyHealth : MonoBehaviour {
-
+public class EnemyHealth : MonoBehaviour 
+{
     ParticleSystem Particle1 = null;
     ParticleSystem Particle2 = null;
 
@@ -25,8 +25,7 @@ public class EnemyHealth : MonoBehaviour {
 	bool isDead;
 	bool isSinking;
 	bool damaged;
-	
-	
+		
 	void Awake ()
 	{
 		player = GameObject.FindGameObjectWithTag ("Player");
@@ -37,8 +36,6 @@ public class EnemyHealth : MonoBehaviour {
         Particle2 = transform.GetChild(2).gameObject.GetComponent<ParticleSystem>();
     }
 
-    /// ///////////////////////////////////////////////////////////////
-
     public void Damage(int damage, Vector3 playerPosition, float pushBack, string effectPrefab = "", string audio = "")
     {
         // 공격은 죽지 않았을때만 받습니다.
@@ -47,7 +44,6 @@ public class EnemyHealth : MonoBehaviour {
             // 가끔 MissingReferenceException 예외가 발생하는데 발생해도 스킵하도록 예외처리합니다.
             try
             {
-
                 // 데미지1: 데미지를 몬스터에 체력에 반영합니다.
                 TakeDamage(damage);
 
@@ -64,6 +60,7 @@ public class EnemyHealth : MonoBehaviour {
                 PlaySound(audio);
 
             }
+
             catch (MissingReferenceException e)
             {
                 // 이 예외는 발생해도 그냥 무시하겠습니다.
@@ -71,6 +68,7 @@ public class EnemyHealth : MonoBehaviour {
             }
         }
     }
+
     void PushBack(Vector3 playerPosition, float pushBack)
     {
         // 주인공 캐릭터의 위치와 몬스터의 위치의 차이 벡터를 구합니다.
@@ -91,7 +89,6 @@ public class EnemyHealth : MonoBehaviour {
             AudioSource.PlayClipAtPoint(Resources.Load(audio) as AudioClip, transform.position, 0.1f);
         }
     }
-    /// ///////////////////////////////
 
     public void TakeDamage (int amount)
 	{
@@ -117,8 +114,7 @@ public class EnemyHealth : MonoBehaviour {
     {
 
         // 데미지를 화면에 표시할 DamageText 프리팹을 화면에 생성합니다.
-        // DamageTextPool.Instance.GetObject();
-
+    
         GameObject damageObj = DamageTextPool.Instance.GetObject();  //Instantiate(Resources.Load("Prefab/DamageText"), transform.position+ new Vector3(0f,0.5f,-0.5f), new Quaternion()) as GameObject;
         damageObj.transform.position = transform.position + new Vector3(0f, 0.5f, -0.5f);
 
@@ -133,20 +129,21 @@ public class EnemyHealth : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(delay);
 
-		try{
-
+		try
+        {
 			TakeDamage(damage);
 			
 			Vector3 diff = playerPosition - transform.position;
 			diff = diff / diff.sqrMagnitude;
 			GetComponent<Rigidbody>().AddForce((transform.position - new Vector3(diff.x,diff.y,0f))*50f*pushBack);
 
-		}catch(MissingReferenceException e)
+		}
+
+        catch(MissingReferenceException e)
 		{
 			Debug.Log (e.ToString());
 		}
 	}
-	
 	
 	void Update ()
 	{
@@ -154,7 +151,8 @@ public class EnemyHealth : MonoBehaviour {
 		{
 			transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_OutlineColor", flashColour);
 		}
-		else
+	
+        else
 		{
 			transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.Lerp (transform.GetChild(0).GetComponent<Renderer>().material.GetColor("_OutlineColor"), Color.black, flashSpeed * Time.deltaTime));
 		}
@@ -168,34 +166,20 @@ public class EnemyHealth : MonoBehaviour {
 		}
 	}
 
-
-	
-	void Death ()
-	{
-		// The enemy is dead.
-		isDead = true;
+    void Death()
+    {
+        // The enemy is dead.
+        isDead = true;
 
         // Turn the collider into a trigger so shots can pass through it.
         BoxCollider collider = transform.GetComponentInChildren<BoxCollider>();
         collider.isTrigger = true;
-        //transform.GetChild(0).GetComponent<BoxCollider>().isTrigger = true;
-		
-		// Tell the animator that the enemy is dead.
-		//anim.SetTrigger ("Dead");
-		
-		// Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
-		//enemyAudio.clip = deathClip;
-		//enemyAudio.Play ();
-	
-		StartSinking();
+
+        StartSinking();
         GetComponent<EnemyItem>().ItemDrop();
 
         UpgradeController.Instance.Upgrade();
-
-        //List<Collider> targetList = new List<Collider>();
-        //targetList.Clear();
     }
-	
 	
 	public void StartSinking ()
 	{
@@ -208,11 +192,7 @@ public class EnemyHealth : MonoBehaviour {
 		// The enemy should no sink.
 		isSinking = true;
 		
-		// Increase the score by the enemy's score value.
-		//ScoreManager.score += scoreValue;
-		
 		// After 2 seconds destory the enemy.
 		Destroy (gameObject, 2f);
 	}
-
 }

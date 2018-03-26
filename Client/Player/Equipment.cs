@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Equipment : MonoBehaviour {
-
+public class Equipment : MonoBehaviour 
+{
     public Item[] EquipItem;
 
     public GameObject[] EquipSlots;
@@ -15,6 +15,4 @@ public class Equipment : MonoBehaviour {
 
         }
     }
-
-
 }

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SlimePool : ObjectPool {
-	
+public class SlimePool : ObjectPool 
+{	
 	// 싱글톤(Singleton) 형식으로 슬라임을 생성하는 슬라임 풀을 생성합니다.
 	private static SlimePool _instance;
     public static SlimePool Instance
@@ -19,7 +19,6 @@ public class SlimePool : ObjectPool {
                                     _instance = container.AddComponent(typeof(SlimePool)) as SlimePool;
                             }
                     }
-
                     return _instance;
             }
     }
@@ -41,6 +40,5 @@ public class SlimePool : ObjectPool {
 		po.SetActive(true);
 		// 슬라임 오브젝트의 EnemyHealth 클래스를 불러와서 체력을 초기화하겠습니다.
 		EnemyHealth health = po.GetComponent<EnemyHealth>();
-//		health.Init();
 	}
 }

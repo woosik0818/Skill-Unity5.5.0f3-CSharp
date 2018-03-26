@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalTarget : MonoBehaviour {
-
+public class NormalTarget : MonoBehaviour 
+{
 	public List<Collider> targetList;
 
 	void Awake()

@@ -18,7 +18,8 @@ public class PlayerMagic : MonoBehaviour
 	PlayerMovement playerMovement;
 	bool isDead;
 
-	void Start(){
+	void Start()
+    {
 		playerHealth = GetComponent<PlayerHealth> ();
 	}
 
@@ -37,29 +38,33 @@ public class PlayerMagic : MonoBehaviour
 	// 플레이어가 공격받았을 때 호출되는 함수입니다.
 	public void useSkill (int amount)
 	{
-
 		// 공격을 받으면 amount만큼 체력을 감소시킵니다.
 		currentMP -= amount;
 
         // 체력게이지에 변경된 체력값을 표시합니다.
         mpBar.fillAmount = currentMP / startingMP;
         mpBar_VR.fillAmount = currentMP / startingMP;
-
-
     }
 
 	public void MpPotion ()
 	{
 		isDead = playerHealth.isDead;
-		if (isDead == false) {
-			if (currentMP < startingMP) {
-				if ((currentMP + 20) <= startingMP) {
+		if (isDead == false) 
+        {
+			if (currentMP < startingMP) 
+            {
+				if ((currentMP + 20) <= startingMP) 
+                {
 					currentMP += 20;
-				} else {
+				} 
+
+                else 
+                {
 					currentMP = startingMP;
 				}
 			}
 		}
+
         mpBar.fillAmount = currentMP / startingMP;
         mpBar_VR.fillAmount = currentMP / startingMP;
     }

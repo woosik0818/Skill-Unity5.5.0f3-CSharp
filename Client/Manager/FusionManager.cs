@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class FusionManager : MonoBehaviour
 {
-
     public static FusionManager Instance;
     public GameObject fusioninventory;
 
     FusionInventory IV;
 
     SkillInfo[] itemslots;
+ 
     // Use this for initialization
     void Awake()
     {
@@ -34,6 +34,7 @@ public class FusionManager : MonoBehaviour
             }
         }
     }
+
     public FusionInventory getInventory()
     {
         return IV;

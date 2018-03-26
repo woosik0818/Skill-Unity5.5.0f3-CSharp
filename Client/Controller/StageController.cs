@@ -4,7 +4,8 @@ using UnityEngine.UI;
 using Boomlagoon.JSON;
 using System.Collections.Generic;
 
-public class StageController : MonoBehaviour {
+public class StageController : MonoBehaviour 
+{
 
 	// StageController를 싱글톤 클래스처럼 아무곳에서나 접근하기 위한 static 변수입니다.
 	public static StageController Instance;
@@ -16,14 +17,14 @@ public class StageController : MonoBehaviour {
 	public Text PointText;
 
 	// Start 함수에서 Instance 변수를 설정해줍니다.
-	void Start () {
+	void Start () 
+    {
 		Instance = this;
 
 		SlimePool.Instance.Init();
 		DamageTextPool.Instance.Init();
 		SkillAttack1Pool.Instance.Init();
 		SkillAttack2Pool.Instance.Init();
-
     }
 
 	// 플레이어가 몬스터를 죽였을 때, 포인트를 증가시켜주는 함수입니다.
@@ -32,7 +33,4 @@ public class StageController : MonoBehaviour {
 		StagePoint += Point;
 		PointText.text = StagePoint.ToString();
 	}
-
-
-
 }

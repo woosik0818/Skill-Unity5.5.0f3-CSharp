@@ -7,7 +7,8 @@ public class DialogControllerAlert : DialogController
 	public Text LabelTitle;
 	public Text LabelMessage;
 
-	DialogDataAlert Data {
+	DialogDataAlert Data 
+    {
 		get;
 		set;
 	}
@@ -28,7 +29,8 @@ public class DialogControllerAlert : DialogController
     {
 		base.Build(data);
 		
-		if( ! (data is DialogDataAlert) ) {
+		if( ! (data is DialogDataAlert) ) 
+        {
 			Debug.LogError("Invalid dialog data!");
 			return;
 		}

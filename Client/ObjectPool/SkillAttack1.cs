@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SkillAttack1 : MonoBehaviour {
-	
+public class SkillAttack1 : MonoBehaviour 
+{	
 	public void Play()
 	{
 		StartCoroutine(StartDisappearAfter(2f));
@@ -13,5 +13,4 @@ public class SkillAttack1 : MonoBehaviour {
 		yield return new WaitForSeconds(time);
 		SkillAttack1Pool.Instance.ReleaseObject(gameObject);
 	}
-
 }

@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 namespace DotnetCoreServer.Models
 {
-    public interface IRankDao{
+    public interface IRankDao
+    {
         List<RankUser> TotalRank(int Start, int Count);
         List<RankUser> FriendRank(List<string> FacebookIDList);
     }
@@ -13,11 +14,13 @@ namespace DotnetCoreServer.Models
     {
         public IDB db {get;}
 
-        public RankDao(IDB db){
+        public RankDao(IDB db)
+        {
             this.db = db;
         }
 
-        public List<RankUser> TotalRank(int Start, int Count){
+        public List<RankUser> TotalRank(int Start, int Count)
+        {
             
             List<RankUser> list = new List<RankUser>();
             using(MySqlConnection conn = db.GetConnection())
@@ -63,9 +66,11 @@ namespace DotnetCoreServer.Models
 
         }
         
-        public List<RankUser> FriendRank(List<string> FacebookIDList){
+        public List<RankUser> FriendRank(List<string> FacebookIDList)
+        {
 
-            for(int i = 0; i < FacebookIDList.Count; i++){
+            for(int i = 0; i < FacebookIDList.Count; i++)
+            {
                 FacebookIDList[i] = string.Format("'{0}'", FacebookIDList[i]);
             }
             
@@ -111,8 +116,5 @@ namespace DotnetCoreServer.Models
             }
             return list;
         }
-
-
-
     }
 }

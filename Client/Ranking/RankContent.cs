@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RankContent : MonoBehaviour {
-
+public class RankContent : MonoBehaviour 
+{
 	public RankCell[] rankCellList;
 
 	public int rankContentHeight;
@@ -22,7 +22,6 @@ public class RankContent : MonoBehaviour {
 		btnTabTotalRank.SetActive (false);
 		currentTab = "total";
 		LoadRankList ();
-
 	}
 
 	public void TabFriendRank()
@@ -40,10 +39,12 @@ public class RankContent : MonoBehaviour {
 		LoadRankList ();
 
 	}
+
 	public void RemoveRankCell()
 	{
 		var list = gameObject.GetComponentsInChildren<RankCell> ();
-		foreach (var cell in list) {
+		foreach (var cell in list) 
+        {
 			RankCellPool.Instance.ReleaseObject (cell.gameObject);
 		}
 	}
@@ -52,16 +53,15 @@ public class RankContent : MonoBehaviour {
 	{
 		Debug.Log ("LoadRankList()");
 		
-		if (currentTab == "total") {
-			
+		if (currentTab == "total") 
+        {	
 			LoadTotalRank ();
+		} 
 
-		} else {
-			
+        else 
+        {	
 			LoadFriendRank ();
-
 		}
-
 	}
 
 	public void LoadTotalRank()
@@ -73,8 +73,8 @@ public class RankContent : MonoBehaviour {
 		float start_y = -40f;
 		float content_height = 50f;
 
-		foreach (var item in rankList) {
-			
+		foreach (var item in rankList) 
+        {	
 			var rank = item.Key;
 			var user = item.Value;
 
@@ -89,7 +89,7 @@ public class RankContent : MonoBehaviour {
 			cell.SetData (user);
 
 			var rect = obj.GetComponent<RectTransform> ();
-			//RectTransformExtensions.SetRightTopPosition
+			
 			rect.SetDefaultScale ();
 			rect.anchoredPosition = new Vector2 (0f, start_y);
 			rect.offsetMin = new Vector2 (20f, start_y);
@@ -98,8 +98,8 @@ public class RankContent : MonoBehaviour {
 			start_y = start_y - unit;
 			content_height = content_height + unit;
 		}
-		GetComponent<RectTransform> ().SetHeight (content_height);
 
+		GetComponent<RectTransform> ().SetHeight (content_height);
 	}
 
 	public void LoadFriendRank()
@@ -112,8 +112,8 @@ public class RankContent : MonoBehaviour {
 		float start_y = -40f;
 		float content_height = 50f;
 
-		foreach (var item in rankList) {
-
+		foreach (var item in rankList) 
+        {
 			var rank = item.Key;
 			var user = item.Value;
 
@@ -139,8 +139,7 @@ public class RankContent : MonoBehaviour {
 			start_y = start_y - unit;
 			content_height = content_height + unit;
 		}
+
 		GetComponent<RectTransform> ().SetHeight (content_height);
-
 	}
-
 }

@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChatManager : MonoBehaviour {
-
-    //static ChatManager chatmanager = null;            //싱글톤 만들거임
-
-    public string charactorID = "배가고파";
+public class ChatManager : MonoBehaviour 
+{
+    public string charactorID = "임재형";
 
     public UnityEngine.UI.InputField InputText;
     public UnityEngine.UI.Text OutputText;
@@ -16,12 +14,6 @@ public class ChatManager : MonoBehaviour {
     static string[] chatlist = new string[Maxchat];    // 채팅을 배열로 받아서 화면에 출력    0,1,2
 
     static int chatcount = 0;    // 현재 채팅의 갯수를 저장하여 화면에 출력되는 채팅의 갯수를 조절할 때 사용
-
-    //private void Awake()
-    //{
-    //    if(chatmanager == null)
-    //        chatmanager = new ChatManager();    
-    //}
 
     public void SendClick()
     {
@@ -36,9 +28,7 @@ public class ChatManager : MonoBehaviour {
                 chatcount--;
             }
 
-            chatlist[chatcount] = charactorID + " : " + InputText.text;           // 채팅리스트 가장 마지막에 텍스트 입력     현재는 2에 입력이 될거임
-
-            //
+            chatlist[chatcount] = charactorID + " : " + InputText.text;           // 채팅리스트 가장 마지막에 텍스트 입력     현재는 2에 입력
 
             OutputText.text = "";   // 화면에 출력되는 output text를 초기화 후 리스트에 있는 채팅으로 재구성
             for (int i = 0; i != chatcount + 1; i++)
@@ -46,24 +36,21 @@ public class ChatManager : MonoBehaviour {
                 OutputText.text = OutputText.text + chatlist[i] + "\n";
             }
 
-            //
-
-            //OutputText.text = OutputText.text + chatlist[chatcount] + "\n";         //화면에 출력
-
             InputText.text = "";                            //입력 텍스트창 초기화
 
-            //if (chatcount != Maxchat - 1)                   // 배열 크기 초과 방지
             chatcount++;
         }
     }
 
     // Use this for initialization
-    void Start () {
+    void Start () 
+    {
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
 		
 	}
 }

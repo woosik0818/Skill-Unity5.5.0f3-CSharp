@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemManager : MonoBehaviour {
-    
+public class ItemManager : MonoBehaviour 
+{    
     public static ItemManager Instance;
     public GameObject inventory;
 
     Inventory IV;
 
     Item[] itemslots;
+ 
     // Use this for initialization
     void Awake()
     {
@@ -33,10 +34,9 @@ public class ItemManager : MonoBehaviour {
             }
         }
     }
+
     public Inventory getInventory()
     {
         return IV;
     }
-
-
 }

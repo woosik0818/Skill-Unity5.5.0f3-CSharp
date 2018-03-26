@@ -4,7 +4,6 @@ using System.Collections;
 
 public class DialogController : MonoBehaviour
 {
-
 	public Transform window;
 	
 	public bool Visible 
@@ -33,7 +32,8 @@ public class DialogController : MonoBehaviour
 	{		
 		Visible = true;
 
-		if( callback != null ) {
+		if( callback != null ) 
+        {
 			callback();
 		}
 		yield break;
@@ -43,7 +43,8 @@ public class DialogController : MonoBehaviour
 	{
 		Visible = false;
 
-		if( callback != null ) {
+		if( callback != null ) 
+        {
 			callback();
 		}
 		yield break;

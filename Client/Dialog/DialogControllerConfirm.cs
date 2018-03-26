@@ -7,7 +7,8 @@ public class DialogControllerConfirm : DialogController
 	public Text LabelTitle;
 	public Text LabelMessage;
 
-	DialogDataConfirm Data { 
+	DialogDataConfirm Data 
+    { 
 		get; 
 		set; 
 	}
@@ -28,7 +29,8 @@ public class DialogControllerConfirm : DialogController
     {
         base.Build(data);
 
-		if( ! (data is DialogDataConfirm) ) {
+		if( ! (data is DialogDataConfirm) ) 
+        {
 			Debug.LogError("Invalid dialog data!");
 			return;
 		}

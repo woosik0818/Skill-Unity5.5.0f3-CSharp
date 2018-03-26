@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySkillAttack : MonoBehaviour {
-
+public class EnemySkillAttack : MonoBehaviour 
+{
     public int Skill;
     public float RetentionTime = 1f;
     public float Nuckback = 2f;

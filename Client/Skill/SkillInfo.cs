@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillInfo : MonoBehaviour {
-
+public class SkillInfo : MonoBehaviour 
+{
     public enum TYPE { Skill, HPPotion, MPPotion }
 
     public TYPE type;           // 아이템의 타입.
@@ -26,8 +26,6 @@ public class SkillInfo : MonoBehaviour {
         // 아이템 획득에 실패할 경우.
         if (!iv.AddItem(this))
             Debug.Log("아이템이 가득 찼습니다.");
-        //else // 아이템 획득에 성공할 경우.
-        //    gameObject.SetActive(false); // 아이템을 비활성화 시켜준다.
     }
 
     public int typecheck()
@@ -44,14 +42,4 @@ public class SkillInfo : MonoBehaviour {
     {
         SkillDatabase.Instance.SkillUsing(SkillNumber);
     }
-
-    //void OnTriggerEnter(Collider _col)
-    //{
-    //    string name = LayerMask.LayerToName(_col.gameObject.layer);
-    //    // 플레이어와 충돌하면.
-    //    if (name == "Player")
-    //    {
-    //        AddItem();
-    //    }
-    //}
 }

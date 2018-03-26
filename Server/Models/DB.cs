@@ -10,7 +10,8 @@ public class DB : IDB
 {
     public string ConnectionString;
 
-    public DB(IConfiguration configuration){
+    public DB(IConfiguration configuration)
+    {
         this.ConnectionString = configuration.GetConnectionString("DefaultConnection");
     }
     

@@ -2,17 +2,20 @@
 
 public class DialogDataAlert : DialogData 
 {
-	public string Title { 
+	public string Title 
+    { 
 		get; 
 		private set; 
 	}
 
-	public string Message { 
+	public string Message 
+    { 
 		get; 
 		private set; 
 	}
 
-	public Action Callback {
+	public Action Callback 
+    {
 		get; 
 		private set; 
 	}

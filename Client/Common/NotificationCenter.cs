@@ -12,7 +12,6 @@ public class NotificationCenter
 			return instance; 
 		}
 	}
-	//
 	
 	public delegate void UpdateDelegator();
 	public enum Subject
@@ -27,6 +26,7 @@ public class NotificationCenter
 	{
 		_delegateMap = new Dictionary<Subject, UpdateDelegator> ();
 	}
+
 	public void Add(Subject subject, UpdateDelegator delegator)
 	{
 		if (_delegateMap.ContainsKey (subject) == false) 
@@ -46,6 +46,7 @@ public class NotificationCenter
 		
 		_delegateMap [subject] -= delegator;
 	}
+
 	public void Notify(Subject subject)
 	{
 		if (_delegateMap.ContainsKey (subject) == false) 
@@ -60,6 +61,7 @@ public class NotificationCenter
 			{
 				delegator();
 			}
+
 			catch (System.Exception e)
 			{
 				Debug.LogException(e);

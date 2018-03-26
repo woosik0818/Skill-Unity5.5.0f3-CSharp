@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneMoveTrigger : MonoBehaviour {
-
+public class SceneMoveTrigger : MonoBehaviour 
+{
     public GameObject btn;
     public string movename;
     public string DestinationName;

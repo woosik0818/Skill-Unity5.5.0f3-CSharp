@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 namespace DotnetCoreServer.Models
 {
-    public interface IUserDao{
+    public interface IUserDao
+    {
         User FindUserByFUID(string FacebookID);
         User GetUser(long UserID);
         User InsertUser(User user);
@@ -16,11 +17,13 @@ namespace DotnetCoreServer.Models
     {
         public IDB db {get;}
 
-        public UserDao(IDB db){
+        public UserDao(IDB db)
+        {
             this.db = db;
         }
 
-        public User FindUserByFUID(string FacebookID){
+        public User FindUserByFUID(string FacebookID)
+        {
             User user = new User();
             using(MySqlConnection conn = db.GetConnection())
             {   
@@ -52,7 +55,8 @@ namespace DotnetCoreServer.Models
             return null;
         }
         
-        public User GetUser(long UserID){
+        public User GetUser(long UserID)
+        {
             User user = new User();
             using(MySqlConnection conn = db.GetConnection())
             {   
@@ -101,7 +105,8 @@ namespace DotnetCoreServer.Models
             return user;
         }
 
-        public User InsertUser(User user){
+        public User InsertUser(User user)
+        {
             
             string query = String.Format(
                 "INSERT INTO tb_user (facebook_id, facebook_name, facebook_photo_url, access_token, created_at) VALUES ('{0}','{1}','{2}','{3}', now())",
@@ -118,12 +123,12 @@ namespace DotnetCoreServer.Models
 
                 conn.Close();
             }
-
         
             return user;
         }
 
-        public bool UpdateUser(User user){
+        public bool UpdateUser(User user)
+        {
             using(MySqlConnection conn = db.GetConnection())
             {
                 string query = String.Format(
@@ -148,8 +153,5 @@ namespace DotnetCoreServer.Models
             }
             return true;
         }
-
-
-
     }
 }

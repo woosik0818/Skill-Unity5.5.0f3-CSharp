@@ -3,26 +3,19 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 
-public class TouchPad : MonoBehaviour {
-	
+public class TouchPad : MonoBehaviour 
+{	
 	public RectTransform _touchPad;
-
 	private int _touchId = -1;
-
 	private Vector3 _startPos = Vector3.zero;
-		
 	private float _dragRadius = 60f;
-
 	public PlayerMovement _player;
-
 	private bool _buttonPressed = false;
 		
-	void Start () {
-
+	void Start () 
+    {
 		_touchPad = GetComponent<RectTransform> ();
-
 		_startPos = _touchPad.position;
-						
 	}
 	
 	public void ButtonDown()
@@ -33,9 +26,7 @@ public class TouchPad : MonoBehaviour {
 	public void ButtonUp()
 	{
 		_buttonPressed = false;
-
 		HandleInput(_startPos);
-
 	}
 
 
@@ -48,7 +39,6 @@ public class TouchPad : MonoBehaviour {
 		HandleInput(Input.mousePosition);
 		
 #endif
-			
 	}
 	
 	void HandleTouchInput ()
@@ -60,9 +50,8 @@ public class TouchPad : MonoBehaviour {
 			foreach(Touch touch in Input.touches)
 			{
 				i++;
-
 				Vector3 touchPos = new Vector3(touch.position.x, touch.position.y);
-				
+			
 				if(touch.phase == TouchPhase.Began)
 				{
 					if(touch.position.x 
@@ -70,7 +59,6 @@ public class TouchPad : MonoBehaviour {
 					{
 						_touchId = i;
 					}
-
 				}
 				
 				if(touch.phase == TouchPhase.Moved 
@@ -89,7 +77,6 @@ public class TouchPad : MonoBehaviour {
 						_touchId = -1;
 					}
 				}
-
 			}
 		}
 	}
@@ -108,27 +95,25 @@ public class TouchPad : MonoBehaviour {
 				_touchPad.position = _startPos +
 					diffVector * _dragRadius;
 			}
+
 			else
 			{
 				_touchPad.position = input;
 			}
 		}
+
 		else
 		{
 			_touchPad.position = _startPos;
 		}
 
 		Vector3 diff = _touchPad.position - _startPos;
-
 		Vector2 normDiff 
 			= new Vector3(diff.x / _dragRadius, diff.y / _dragRadius);
-
 
 		if(_player != null)
 		{
 			_player.OnStickChanged(normDiff);
 		}
 	}
-
-
 }

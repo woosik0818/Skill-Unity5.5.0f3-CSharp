@@ -1,5 +1,6 @@
 
-namespace DotnetCoreServer.Models{
+namespace DotnetCoreServer.Models
+{
     public class UpgradeRequest
     {
         //public long UserID;

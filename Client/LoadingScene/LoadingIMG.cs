@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoadingIMG : MonoBehaviour {
-    
+public class LoadingIMG : MonoBehaviour 
+{    
     public UnityEngine.UI.Text IMG_Text;
 
     public Sprite[] IMG;
@@ -16,7 +16,8 @@ public class LoadingIMG : MonoBehaviour {
     "킹슬라임은 거대하고 강력한, 붉은색의 변종 슬라임입니다."};
 
 	// Use this for initialization
-	void Start (){
+	void Start ()
+    {
         index = Random.Range(0, IMG.Length);
         GetComponent<UnityEngine.UI.Image>().sprite = IMG[index];
         IMG_Text.text = text[index];

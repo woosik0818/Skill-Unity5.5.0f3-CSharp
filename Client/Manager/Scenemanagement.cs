@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scenemanagement : MonoBehaviour {
-
+public class Scenemanagement : MonoBehaviour 
+{
     public static Scenemanagement Instance;
     string Destination;
     bool isOnTheTirgger = false;
+ 
     // Use this for initialization
     void Awake()
     {
@@ -15,10 +16,12 @@ public class Scenemanagement : MonoBehaviour {
         else if (Instance != this)
             Debug.LogError("Not Single Scenemanagement!");
     }
+
     public void SceneMove(string name)
     {
         LoadingSceneManager.LoadScene(name);
     }
+
     public void SceneMove()
     {
         CharactorManager.Instance.SetVRMode();
@@ -34,10 +37,12 @@ public class Scenemanagement : MonoBehaviour {
     {
         return isOnTheTirgger;
     }
+
     public void triggerIn()
     {
         isOnTheTirgger = true;
     }
+
     public void triggerOut()
     {
         isOnTheTirgger = false;

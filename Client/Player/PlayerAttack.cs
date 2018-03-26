@@ -3,17 +3,12 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public class PlayerAttack : MonoBehaviour {
-
+public class PlayerAttack : MonoBehaviour 
+{
     public GameObject NormarTergetPref;
     public GameObject SkillTargetPref;
     public GameObject DashPref;
 
-    // 플레이어가 몬스터에게 주는 데미지 수치입니다. 
-    // 레벨/경험치 파츠 업그레이드 챕터에서 캐릭터 성잠시스템을 도입하면 변경될 예정입니다.
-    //public int NormalDamage = CharactorManager.Instance.GetAttack();
-	//public int SkillDamage = 30;
-	//public int DashDamage = 30;
 	public int SkillMP = 20;
 	// 캐릭터의 공격 반경입니다. 
 	// 타겟의 Trigger로 어떤 몬스터가 공격 반경 안에 들어왔는지 판정합니다.
@@ -33,48 +28,21 @@ public class PlayerAttack : MonoBehaviour {
 		// Instance에 자기 자신을 할당합니다. 
 		// 이로 인해, 외부 스크립트에서 PlayerAttack.Instance 이렇게 접근 가능합니다.
 		Instance = this;
-		// 현재 이 게임 오브젝트에 붙어있는 오디오 소스 콤포넌트를 변수에 할당합니다.
-		audioSource = GetComponent<AudioSource>();
-
-//		NormalDamage = UserSingleton.Instance.Damage;
-//		DashDamage = UserSingleton.Instance.Damage*2;
-//		SkillDamage = UserSingleton.Instance.Damage*3;
+        // 현재 이 게임 오브젝트에 붙어있는 오디오 소스 콤포넌트를 변수에 할당합니다.
+        audioSource = GetComponent<AudioSource>();
 	}
 
 	public void NormalAttack()
 	{
         // 일반 공격을 할 때 재생될 수 있는 주인공 캐릭터의 목소리들입니다. 
         // 이 목소리들 중 하나가 랜덤으로 재생됩니다.
-        string[] attackSound = {    "VoiceSample/13.attack_B1", "VoiceSample/13.attack_B1", "VoiceSample/14.attack_B2", "VoiceSample/15.attack_B3", "VoiceSample/16.attack_C1", "VoiceSample/17.attack_C2", "VoiceSample/18.attack_C3"};
+        string[] attackSound = {"VoiceSample/13.attack_B1", "VoiceSample/13.attack_B1", "VoiceSample/14.attack_B2", "VoiceSample/15.attack_B3", "VoiceSample/16.attack_C1", "VoiceSample/17.attack_C2", "VoiceSample/18.attack_C3"};
 
         // 목소리 리스트 중에서 하나를 랜덤으로 재생시키는 함수입니다.
         PlayRandomVoice(attackSound);
 
         GameObject obj = Instantiate(NormarTergetPref, normalTarget.position, normalTarget.rotation);
         obj.transform.SetParent(transform.GetChild(0));
-        /*
-        // normalTarget에 붙어있는 Trigger Collider에 들어있는 몬스터의 리스트를 조회합니다. 
-        List<Collider> targetList 
-			= new List<Collider>(normalTarget.targetList);
-
-		// 타겟 리스트 안에 있는 몬스터들을 foreach 문으로 하나하나 다 조회합니다.
-		foreach(Collider one in targetList)
-        {
-			// 타겟의 게임 오브젝트에 EnemyHealth라는 스크립트를 가져옵니다.
-			EnemyHealth enemy = one.GetComponent<EnemyHealth>();
-			// 만약 EnemyHealth 스크립트가 있다면 몬스터이므로, 몬스터에게 데미지를 줍시다.
-			if(enemy != null)
-            {
-				// 몬스터에게 데미지를 주면서, 데미지를 얼마 줄지, 얼마나 뒤로 밀려날지(pushBack),
-			    StartCoroutine(enemy.StartDamage(CharactorManager.Instance.GetAttack(), transform.position, 0.5f, 0.5f));
-				// 몬스터에게 데미지를 주면서, 데미지를 얼마 줄지, 얼마나 뒤로 밀려날지(pushBack),
-				// 타격 이펙트는 뭘 줄지(effectPrefab), 오디오는 뭘 재생할지(audio)를 매개변수로 전달합니다.
-				//enemy.Damage(NormalDamage,transform.position, 2f, "SkillAttack1","Audio/explosion_enemy");	
-				
-			}
-			
-		}*/
-
     }
 
 	public void DashAttack()
@@ -91,30 +59,7 @@ public class PlayerAttack : MonoBehaviour {
 
         GameObject obj = Instantiate(DashPref, transform.GetChild(0).transform.position, transform.GetChild(0).transform.rotation);
         obj.transform.SetParent(transform.GetChild(0));
-
-        //      // normalTarget에 붙어있는 Trigger Collider에 들어있는 몬스터의 리스트를 조회합니다. 
-        //      List<Collider> targetList = new List<Collider>(skillTarget.targetList);
-
-        //      // 타겟 리스트 안에 있는 몬스터들을 foreach 문으로 하나하나 다 조회합니다.
-        //      foreach (Collider one in targetList)
-        //      {
-
-        //	// 타겟의 게임 오브젝트에 EnemyHealth라는 스크립트를 가져옵니다.
-        //	EnemyHealth enemy = one.GetComponent<EnemyHealth>();
-
-        //	// 만약 EnemyHealth 스크립트가 있다면 몬스터이므로, 몬스터에게 데미지를 줍시다.
-        //	if(enemy != null)
-        //          {
-        //		// 몬스터에게 데미지를 주면서, 데미지를 얼마 줄지, 얼마나 뒤로 밀려날지(pushBack),
-        //		StartCoroutine(enemy.StartDamage(CharactorManager.Instance.GetAttack() * 3, transform.position, 0.5f, 2f));
-        //		// 타격 이펙트는 뭘 줄지(effectPrefab), 오디오는 뭘 재생할지(audio)를 매개변수로 전달합니다.
-        //		//enemy.Damage(CharactorManager.Instance.GetAttack() * 3, transform.position, 4f, "SkillAttack2", "Audio/explosion_enemy");
-
-        //	}
-
-        //}
     }
-
 
 	public void SkillAttack()
 	{
@@ -126,46 +71,13 @@ public class PlayerAttack : MonoBehaviour {
             // 스킬 공격을 할 때 재생될 수 있는 주인공 캐릭터의 목소리들입니다. 
             // 이 목소리들 중 하나가 랜덤으로 재생됩니다.
             string[] attackSound = { "VoiceSample/10.attack_A1", "VoiceSample/11.attack_A2", "VoiceSample/12.attack_A3", "VoiceSample/13.attack_B1", "VoiceSample/14.attack_B2", "VoiceSample/15.attack_B3", "VoiceSample/16.attack_C1", "VoiceSample/17.attack_C2", "VoiceSample/18.attack_C3" };
-            //string[] attackSound = {
-            //    "VoiceSample/44.special_attack_X1", "VoiceSample/45.special_attack_X2",
-            //    "VoiceSample/46.special_attack_X3", "VoiceSample/47.special_attack_X4",
-            //    "VoiceSample/48.special_attack_X5",
-            //    "VoiceSample/50.special_attack_X7"};
 
             // 목소리 리스트 중에서 하나를 랜덤으로 재생시키는 함수입니다.
             PlayRandomVoice(attackSound);
 
             GameObject obj = Instantiate(SkillTargetPref, transform.GetChild(0).transform.position, transform.GetChild(0).transform.rotation);
             obj.transform.SetParent(transform.GetChild(0));
-
-            //// normalTarget에 붙어있는 Trigger Collider에 들어있는 몬스터의 리스트를 조회합니다. 
-            //List<Collider> targetList = new List<Collider> (skillTarget.targetList);
-
-            //// 타겟 리스트 안에 있는 몬스터들을 foreach 문으로 하나하나 다 조회합니다.
-            //foreach (Collider one in targetList)
-            //{
-
-            //    // 타겟의 게임 오브젝트에 EnemyHealth라는 스크립트를 가져옵니다.
-            //    EnemyHealth enemy = one.GetComponent<EnemyHealth>();
-
-            //    // 만약 EnemyHealth 스크립트가 있다면 몬스터이므로, 몬스터에게 데미지를 줍시다.
-            //    if (enemy != null)
-            //    {
-
-            //        // 몬스터에게 데미지를 주면서, 데미지를 얼마 줄지, 얼마나 뒤로 밀려날지(pushBack),
-            //        StartCoroutine(enemy.StartDamage(CharactorManager.Instance.GetAttack() * 5, transform.position, 0.5f, 2f));
-            //        // 몬스터에게 데미지를 주면서, 데미지를 얼마 줄지, 얼마나 뒤로 밀려날지(pushBack),
-            //        // 타격 이펙트는 뭘 줄지(effectPrefab), 오디오는 뭘 재생할지(audio)를 매개변수로 전달합니다.
-            //        //enemy.Damage(CharactorManager.Instance.GetAttack() * 5, transform.position, 7f,
-            //        //	"SkillAttack1","Audio/explosion_player" );
-            //    }
-            //}
-            //return true;
         }
-        //else
-        //{
-        //    return false;
-        //}
     }
 	
 	// 랜덤으로 목소리를 재생하는 함수입니다.
@@ -179,18 +91,22 @@ public class PlayerAttack : MonoBehaviour {
 		audioSource.PlayOneShot(Resources.Load(attackSound[rand]) as AudioClip);
 
 	}
+
 	// 주인공 캐릭터에게 발생하는 이펙트를 생성합니다.
 	void PlayEffect(string prefabName)
 	{
-		if(prefabName == "SkillAttack1"){
+		if(prefabName == "SkillAttack1")
+        {
 			GameObject effect = SkillAttack1Pool.Instance.GetObject();
 			effect.transform.position = transform.position+ new Vector3(0f,0.5f,-0.5f);
 			effect.GetComponent<SkillAttack1>().Play();
-		}else if(prefabName == "SkillAttack2"){
+		}
+
+        else if(prefabName == "SkillAttack2")
+        {
 			GameObject effect = SkillAttack2Pool.Instance.GetObject();
 			effect.transform.position = transform.position+ new Vector3(0f,0.5f,-0.5f);
 			effect.GetComponent<SkillAttack2>().Play();
 		}
-
 	}
 }

@@ -14,6 +14,7 @@ public class CharactorManager : MonoBehaviour
         {
             return PlayerPrefs.GetInt("UserID");
         }
+
         set
         {
             PlayerPrefs.SetInt("UserID", value);
@@ -27,6 +28,7 @@ public class CharactorManager : MonoBehaviour
         {
             return PlayerPrefs.GetString("AccessToken");
         }
+
         set
         {
             PlayerPrefs.SetString("AccessToken", value);
@@ -40,6 +42,7 @@ public class CharactorManager : MonoBehaviour
         {
             return PlayerPrefs.GetString("FacebookID");
         }
+
         set
         {
             PlayerPrefs.SetString("FacebookID", value);
@@ -53,6 +56,7 @@ public class CharactorManager : MonoBehaviour
         {
             return PlayerPrefs.GetString("FacebookAccessToken");
         }
+
         set
         {
             PlayerPrefs.SetString("FacebookAccessToken", value);
@@ -66,6 +70,7 @@ public class CharactorManager : MonoBehaviour
         {
             return PlayerPrefs.GetString("Name");
         }
+
         set
         {
             PlayerPrefs.SetString("Name", value);
@@ -79,12 +84,12 @@ public class CharactorManager : MonoBehaviour
         {
             return PlayerPrefs.GetString("FacebookPhotoURL");
         }
+
         set
         {
             PlayerPrefs.SetString("FacebookPhotoURL", value);
         }
     }
-
 
     static CharactorManager _instance;
     public static CharactorManager Instance {
@@ -97,7 +102,6 @@ public class CharactorManager : MonoBehaviour
 
                 DontDestroyOnLoad(container);
             }
-
             return _instance;
         }
     }
@@ -105,7 +109,6 @@ public class CharactorManager : MonoBehaviour
     public GameObject player;
 
     //플레이어의 기본 정보
-    //public string Name;
     public int level = 1;
     public int HP, MP, Money;
     public int attack, defence;
@@ -130,7 +133,6 @@ public class CharactorManager : MonoBehaviour
     public int[] p_Item;
 
     //스테이터스 창의 정보출력 Object들
-
     public UnityEngine.UI.Text STR_Text;
     public UnityEngine.UI.Text DEX_Text;
     public UnityEngine.UI.Text INT_Text;
@@ -141,7 +143,6 @@ public class CharactorManager : MonoBehaviour
     public UnityEngine.UI.Text Money_Text;
 
     //수치 계산 후 정보
-
     public UnityEngine.UI.Text HP_Text;
     public UnityEngine.UI.Text MP_Text;
     public UnityEngine.UI.Text Attack_Text;
@@ -157,16 +158,7 @@ public class CharactorManager : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        //if (Instance == null)
-        //    Instance = this;
-        //else if (Instance != this)
-        //    Debug.LogError("Not Single CharactorManager!");
-
-        //LoadPlayerInfo();
         CharactorSpec();
-        //SetText();
-        //LevelText.text = "" + level;
-        //name = "배가고파";
     }
 
     public void FacebookLogin(Action<bool, string> callback, int retryCount = 0)
@@ -174,7 +166,6 @@ public class CharactorManager : MonoBehaviour
 
         FB.LogInWithReadPermissions(new List<string>() { "public_profile", "email", "user_friends" }, delegate (ILoginResult result)
         {
-
             if (result.Error != null && retryCount >= 3)
             {
                 Debug.LogError(result.Error);
@@ -210,7 +201,6 @@ public class CharactorManager : MonoBehaviour
             CharactorManager.Instance.FacebookAccessToken = obj["access_token"].Str;
 
             callback(true, result.RawResult);
-
         });
     }
 
@@ -219,7 +209,6 @@ public class CharactorManager : MonoBehaviour
 
         FB.API("/me", HttpMethod.GET, delegate (IGraphResult result)
         {
-
             if (result.Error != null && retryCount >= 3)
             {
                 Debug.LogError(result.Error);
@@ -243,7 +232,6 @@ public class CharactorManager : MonoBehaviour
             CharactorManager.Instance.Name = meObj["name"].Str;
 
             callback(true, result.RawResult);
-
         });
     }
 
@@ -251,35 +239,25 @@ public class CharactorManager : MonoBehaviour
     //콜백변수로, 로드가 완료되면 다시 호출한 스크립트로 로드가 완료되었다고 호출할 수 있습니다.
     public void Refresh(Action callback)
     {
-        //HTTPClient.Instance.GET(Singleton.Instance.HOST + "/User/Info?UserID=" + CharactorManager.Instance.UserID,
         HTTPClient.Instance.GET(Singleton.Instance.HOST + "/api/values/" + CharactorManager.Instance.UserID,
-        //HTTPClient.Instance.GET(Singleton.Instance.HOST + "/api/User/" + CharactorManager.Instance.UserID,
         delegate (WWW www)
-            {
-                Debug.Log(www.text);
-                //JSONObject response = JSONObject.Parse(www.text);
-                //int ResultCode = (int)response["ResultCode"].Number;
-                //JSONObject data = response["Data"].Obj;
+        {
+            Debug.Log(www.text);
+            JSONObject data = JSONObject.Parse(www.text);
 
-                JSONObject data = JSONObject.Parse(www.text);
+            CharactorManager.Instance.level = (int)data["Level"].Number;
+            CharactorManager.Instance.CurrentEXP = (int)data["Experience"].Number;
+            CharactorManager.Instance.Money = (int)data["Money"].Number;
+            CharactorManager.Instance.Str = (int)data["Str"].Number;
+            CharactorManager.Instance.Dex = (int)data["Dex"].Number;
+            CharactorManager.Instance.Con = (int)data["Con"].Number;
+            CharactorManager.Instance.Int = (int)data["Int"].Number;
+            CharactorManager.Instance.statPoint = (int)data["StatPoint"].Number;
+            CharactorManager.Instance.EXPMax = (int)data["MaxExperience"].Number;
+            callback();
 
-                CharactorManager.Instance.level = (int)data["Level"].Number;
-                CharactorManager.Instance.CurrentEXP = (int)data["Experience"].Number;
-                CharactorManager.Instance.Money = (int)data["Money"].Number;
-                CharactorManager.Instance.Str = (int)data["Str"].Number;
-                CharactorManager.Instance.Dex = (int)data["Dex"].Number;
-                CharactorManager.Instance.Con = (int)data["Con"].Number;
-                CharactorManager.Instance.Int = (int)data["Int"].Number;
-                CharactorManager.Instance.statPoint = (int)data["StatPoint"].Number;
-                CharactorManager.Instance.EXPMax = (int)data["MaxExperience"].Number;
-                //CharactorManager.Instance.playerPosition = (Transform)data["playerPosition"].Number;
-                //CharactorManager.Instance.sceneNumber = (int)data["SceneNumber"].Number;
-                //CharactorManager.Instance.p_Item = (int[])data["p_Item"].Number;
-
-                callback();
-
-                CharactorSpec();
-            });
+            CharactorSpec();
+        });
     }
 
     //플레이어의 정보를 받아오는 함수
@@ -287,71 +265,65 @@ public class CharactorManager : MonoBehaviour
     {
         return attack;
     }
+
     public int GetDefence()
     {
         return defence;
     }
+
     public int GetHP()
     {
         return HP;
     }
+
     public int GetMP()
     {
         return MP;
     }
+
     public int GetMoney()
     {
         return Money;
     }
+
     public int GetLevel()
     {
         print("레벨 : " + level);
         return level;
     }
-    //public string GetName()
-    //{
-    //    return Name;
-    //}
+
     public int GetCurrentEXP()
     {
         return CurrentEXP;
     }
+
     public int GetMaxEXP()
     {
         return EXPMax;
     }
+
     public float GetCritical()
     {
         return Critical;
     }
+
     public float GetCriticalDam()
     {
         return CriticalDamage;
     }
+
     public int GetMagicDam()
     {
         return MagicDamage;
     }
-
-    //플레이어의 이름을 설정해주는 함수
-
-    //public void SetName(string player_name)
-    //{
-    //    name = player_name;
-    //}
-
 
     //플레이어가 레벨업 했을 시에 호출
     public void LevelUP()
     {
         statPoint += 5;
         level++;
-        //LevelText.text = "" + level;
-        //SetText();
         CharactorSpec();
         SceneStartManager.Instance.SetLevelText(level);
-        //UpgradeController.Instance.UpdateUserLevel();
-        //UpgradeController.Instance.Upgrade();
     }
 
     //스텟 정보를 받아오는 함수
@@ -359,38 +331,47 @@ public class CharactorManager : MonoBehaviour
     {
         return Str;
     }
+
     public int GetDex()
     {
         return Dex;
     }
+
     public int GetInt()
     {
         return Int;
     }
+
     public int GetCon()
     {
         return Con;
     }
+
     public int GetStat()
     {
         return statPoint;
     }
+
     public int GetStrTemp()
     {
         return Str_Temp;
     }
+
     public int GetDexTemp()
     {
         return Dex_Temp;
     }
+
     public int GetIntTemp()
     {
         return Int_Temp;
     }
+
     public int GetConTemp()
     {
         return Con_Temp;
     }
+
     public int GetStatTemp()
     {
         return statPoint_Temp;
@@ -403,37 +384,36 @@ public class CharactorManager : MonoBehaviour
         {
             Str += 1;
             statPoint--;
-            //SetText();
             CharactorSpec();
         }
     }
+
     public void DexUp()
     {
         if (statPoint > 0)
         {
             Dex += 1;
             statPoint--;
-            //SetText();
             CharactorSpec();
         }
     }
+
     public void IntUp()
     {
         if (statPoint > 0)
         {
             Int += 1;
             statPoint--;
-            //SetText();
             CharactorSpec();
         }
     }
+
     public void ConUp()
     {
         if (statPoint > 0)
         {
             Con += 1;
             statPoint--;
-            //SetText();
             CharactorSpec();
         }
     }
@@ -443,6 +423,7 @@ public class CharactorManager : MonoBehaviour
     {
         Money += amount;
     }
+
     public void MoneyDown(int amount)
     {
         Money -= amount;
@@ -451,30 +432,14 @@ public class CharactorManager : MonoBehaviour
     //데미지 및 수치 계산
     public void CharactorSpec()
     {
-        //attack = Str * 2 + p_Item[0];
         attack = Str * 2;
         Critical = (float)0.05 * (float)Dex;
         CriticalDamage = (float)0.03 * (float)Dex;
         MP = 10 * Int + ((level - 1) * 5);
         MagicDamage = 3 * Int;
-        //HP = 20 * Con + ((level - 1) * 10) + p_Item[1];
         HP = 20 * Con + ((level - 1) * 10);
         defence = 1 * Con;
-
-        //StatusShow();
-        //SavePlayerInfo();       //로컬저장
     }
-    //화면에 출력되는 스텟정보들 최신화. -> 레벨업시에도 불러줘야 함
-    //void SetText()
-    //{
-    //    STR_Text.text = "" + Str;
-    //    DEX_Text.text = "" + Dex;
-    //    INT_Text.text = "" + Int;
-    //    CON_Text.text = "" + Con;
-    //    StatPoint_Text.text = "" + statPoint;
-
-    //    //SavePlayerInfo();       //로컬저장
-    //}
 
     //temp를 저장하고 스텟을 변경했을 때 한번 더 호출
     public void SetTemp()
@@ -484,8 +449,6 @@ public class CharactorManager : MonoBehaviour
         Int_Temp = Int;
         Con_Temp = Con;
         statPoint_Temp = statPoint;
-
-        //SavePlayerInfo();       //로컬저장
     }
 
     public void ReturnTemp()
@@ -495,7 +458,6 @@ public class CharactorManager : MonoBehaviour
         Int = Int_Temp;
         Con = Con_Temp;
         statPoint = statPoint_Temp;
-        //SetText();
         CharactorSpec();
     }
 
@@ -503,15 +465,8 @@ public class CharactorManager : MonoBehaviour
     {
         SetTemp();
         CharactorSpec();
-
         SceneStartManager.Instance.PlayerSet();
-        //player.GetComponent<PlayerHealth>().HpStat(HP);
-        //player.GetComponent<PlayerMagic>().MPStat(MP);
-
-        //UpgradeController.Instance.UpdateUserInfo();
         UpgradeController.Instance.Upgrade();
-
-        //SavePlayerInfo();
     }
 
     //스테이터스를 화면에 출력
@@ -533,7 +488,6 @@ public class CharactorManager : MonoBehaviour
         {
             ReturnTemp();
             CharactorSpec();
-            //SetText();
             StatusShow();
         }
     }
@@ -550,17 +504,14 @@ public class CharactorManager : MonoBehaviour
             LevelUP();
         }
         SceneStartManager.Instance.ChangeEXP();
-        //UpgradeController.Instance.UpgradeCurrentEXP();
     }
+
     public void TakeMoney(int amount)
     {
         Money += amount;
         SceneStartManager.Instance.MoneyUp();
-        //UpgradeController.Instance.UpgradeMoney();
-        //SetMoney();
-
-        //SavePlayerInfo();
     }
+
     void SetMoney()
     {
         Money_Text.text = "" + Money;
@@ -572,28 +523,31 @@ public class CharactorManager : MonoBehaviour
         p_Item[Itemtype] = iteminfo.stat;
         CharactorSpec();
     }
+
     public void PlayerStatSetting(int Itemtype) //장비 착용해제
     {
         p_Item[Itemtype] = 0;
         CharactorSpec();
     }
+
     public int LooseEXP() //사망시 경험치 잃음(MAX 경험치의 30퍼센트)
     {
         print(EXPMax);
         int temp;
         temp = (int)(EXPMax * 0.3);
+     
         if (temp >= CurrentEXP)
         {
             temp = CurrentEXP;
             CurrentEXP = 0;
         }
+
         else
             CurrentEXP -= temp;
 
         SceneStartManager.Instance.ChangeEXP();
         CharactorSpec();
         UpgradeController.Instance.Upgrade();
-        //UpgradeController.Instance.UpgradeCurrentEXP();
 
         return temp;
     }
@@ -604,55 +558,6 @@ public class CharactorManager : MonoBehaviour
         player.GetComponent<PlayerMagic>().MPReset();
     }
 
-    //public void SavePlayerInfo()
-    //{
-    //    PlayerPrefs.SetInt("Str", Str);
-    //    PlayerPrefs.SetInt("Dex", Dex);
-    //    PlayerPrefs.SetInt("Int", Int);
-    //    PlayerPrefs.SetInt("Con", Con);     //플레이어의 스텟 저장
-    //    PlayerPrefs.SetInt("statPoint", statPoint);
-
-    //    PlayerPrefs.SetString("Name", Name);
-    //    PlayerPrefs.SetInt("level", level);
-    //    PlayerPrefs.SetInt("HP", HP);
-    //    PlayerPrefs.SetInt("MP", MP);
-    //    PlayerPrefs.SetInt("Money", Money); //플레이어의 기본 정보 저장
-
-    //    PlayerPrefs.SetInt("CurrentEXP", CurrentEXP);
-    //    PlayerPrefs.SetInt("EXPMax", EXPMax); //플레이어의 경험치 정보 저장
-
-    //    for (int i = 0; i < 4; i++)
-    //        PlayerPrefs.SetInt("p_Item" + i, p_Item[i]);       //플레이어의 장비정보 저장
-
-    //    PlayerPrefs.Save();
-    //}
-
-    //public void LoadPlayerInfo()
-    //{
-    //    Str = PlayerPrefs.GetInt("Str", 5);
-    //    Dex = PlayerPrefs.GetInt("Dex", 5);
-    //    Int = PlayerPrefs.GetInt("Int", 5);
-    //    Con = PlayerPrefs.GetInt("Con", 5);     //플레이어의 스텟 불러오기
-
-    //    statPoint = PlayerPrefs.GetInt("statPoint", 0);
-    //    Name = PlayerPrefs.GetString("Name", "배가고파");
-    //    level = PlayerPrefs.GetInt("level", 1);
-    //    HP = PlayerPrefs.GetInt("HP", 100);
-    //    MP = PlayerPrefs.GetInt("MP", 50);
-    //    Money = PlayerPrefs.GetInt("Money", 0); //플레이어의 기본 정보 불러오기
-
-    //    CurrentEXP = PlayerPrefs.GetInt("CurrentEXP", 0);
-    //    EXPMax = PlayerPrefs.GetInt("EXPMax", 100); //플레이어의 경험치 정보 저장
-
-    //    for (int i = 0; i < 4; i++)
-    //        p_Item[i] = PlayerPrefs.GetInt("p_Item" + i, 0);       //플레이어의 장비정보 불러오기
-
-    //    SetText();
-    //    CharactorSpec();
-    //    LevelText.text = "" + level;
-    //    EXPBar.value = CurrentEXP;
-    //}
-
     public void VRChange()
     {
         if (VRCheck == 0)
@@ -660,10 +565,12 @@ public class CharactorManager : MonoBehaviour
         else
             VRCheck = 0;
     }
+
     public void SetVRMode()
     {
         PlayerPrefs.SetInt("VR", VRCheck);
     }
+
     public void GetVRMode()
     {
         VRCheck = PlayerPrefs.GetInt("VR", 0);
