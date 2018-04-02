@@ -7,11 +7,11 @@
 - [1장 기획서_임재형](https://github.com/woosik0818/Skill-Unity5.5.0f3-CSharp/blob/master/1장-기획서_임재형.pdf) - 게임을 기획하는 단계에서 작성한 1장 기획서 입니다.			
 #	
 ### 실행영상 (Youtube)
-- [Skill client 실행영상 Youtube](https://www.youtube.com/watch?v=ZyLGNkuaenc&t=22s) - 게임을 실행하는 영상 입니다.
+- [Skill client 실행영상 Youtube](https://www.youtube.com/watch?v=ZyLGNkuaenc&t=0s) - 게임을 실행하는 영상 입니다.
 
 	- 기본 게임 프레임 구현.
 
-- [Skill server & added 실행영상 Youtube](https://www.youtube.com/watch?v=FEekVPb7tFQ&t=140s) - Database 실행하는 영상 입니다.
+- [Skill server & added 실행영상 Youtube](https://www.youtube.com/watch?v=FEekVPb7tFQ&t=0s) - Database 실행하는 영상 입니다.
 
 	- client에 VR모드, 새로운 맵, 로딩화면, 부활 구현.
 	  Microsoft Azure와 Mysql을 이용하여 서버를 통한 데이터베이스에 데이터 저장.
